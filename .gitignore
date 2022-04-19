@@ -35,10 +35,10 @@ flutter/build/
 flutter/lib/generated_plugin_registrant.dart
 
 # Symbolication related
-flutter/app.*.symbols
+flutter/*symbols
 
 # Obfuscation related
-flutter/app.*.map.json
+flutter/*.map.json
 
 # Android Studio will place build artifacts here
 flutter/android/app/debug

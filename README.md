@@ -12,7 +12,7 @@ If you need to change any code, you'll need to build from source. This will requ
 
 Clone this repository into a local directory. Make any changes you need to the scripts. Note that I cannot provide support for altered sources.  
 To test changes, the 'py.bat' script will launch the Python script without automatically launching the Flutter app. Running the Flutter app will not start the Python server. If you run 'python/Spotify Widget.py', it will try (and fail) to launch the Flutter app, so this should not be ran during development.  
-To build the final executable to 'output/', run 'compile.bat'. 'bundleOnly.bat' will use an existing built Flutter app instead of re-building it again, so this can only be run after running 'compile.bat' at least once.
+To build the final executable to 'output/', run 'compile.bat'.
 
 See next section for how to start the executable.
 

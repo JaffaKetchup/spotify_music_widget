@@ -2,7 +2,7 @@ name: spotify_music_widget
 description: A simple transparent widget to display information about the currently playing Spotify track.
 
 publish_to: "none"
-version: 2.0.0
+version: 1.0.0
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
