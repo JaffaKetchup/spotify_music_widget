@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 import spotipy
+import shutil
 from threading import Timer
 from spotipy.oauth2 import SpotifyOAuth
 
@@ -16,10 +17,21 @@ CLIENT_SECRET_PATH = 'credentials/secret.txt'
 
 
 def main():
-    #utils.cleanPreviousTemps()  # Clean up previous extractions of bundle
+    # Clean up previous extractions of bundle
+    utils.cleanPreviousTemps()
 
+    # Automatically extract important information
+    if not os.path.exists('README.md'):
+        shutil.copyfile(utils.resourcePath('extract/README.md'), 'README.md')
+    if (not os.path.exists('LICENSE.txt')) and (not os.path.exists('LICENSE')):
+        shutil.copyfile(utils.resourcePath('extract/LICENSE'), 'LICENSE.txt')
+
+    # Automatically setup authentication filesystem
     if (not os.path.exists(CLIENT_ID_PATH)) or (not os.path.exists(CLIENT_SECRET_PATH)):
-        os.makedirs('credentials/')
+        try:
+            os.makedirs('credentials/')
+        except:
+            print('\'credentials\' directory already existed')
 
         _id = open(CLIENT_ID_PATH, 'w')
         _id.write(
@@ -31,8 +43,7 @@ def main():
             'PASTE YOUR SPOTIFY DEVELOPER APP SECRET HERE (https://developer.spotify.com/dashboard/applications)')
         _secret.close()
 
-        sys.exit(
-            'You must populate \'credentials/id.txt\' and \'credentials/secret.txt\' with valid values')
+        sys.exit()
 
     with open(CLIENT_ID_PATH, 'r') as id, open(CLIENT_SECRET_PATH, 'r') as secret:
         # Attempt authentication with Spotify, without user interaction if possible
@@ -40,7 +51,10 @@ def main():
             sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=id.read(),
                                                            client_secret=secret.read(),
                                                            redirect_uri="http://localhost:8080",
-                                                           scope="user-read-currently-playing user-read-playback-position"))
+                                                           scope="user-read-currently-playing user-read-playback-position",
+                                                           cache_path='credentials/.cache',
+                                                           ))
+
         except:
             os.remove('.cache')
             time.sleep(2)

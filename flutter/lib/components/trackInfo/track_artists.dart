@@ -12,16 +12,26 @@ class TrackArtists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'by ' +
-          ((trackInfo?['artists'] ?? '') == ''
-              ? 'Unknown Artist'
-              : trackInfo!['artists']),
-      style: TextStyle(
-        color: colorMode <= 1 ? Colors.white : Colors.black,
-        fontSize: 12,
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        child: Text(
+          'by ' +
+              ((trackInfo?['artists'] ?? '') == ''
+                  ? 'Unknown Artist'
+                  : trackInfo!['artists']),
+          key: ValueKey<String?>(trackInfo?['artists']),
+          style: TextStyle(
+            color: colorMode <= 1 ? Colors.white : Colors.black,
+            fontSize: 12,
+          ),
+          textAlign: TextAlign.right,
+        ),
       ),
-      textAlign: TextAlign.right,
     );
   }
 }

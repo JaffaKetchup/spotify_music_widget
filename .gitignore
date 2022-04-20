@@ -49,5 +49,8 @@ flutter/android/app/release
 python/__pycache__/
 
 # Local Secrets
-*/credentials/
-*.cache
+**/credentials/
+
+# Extra Output Files
+output/LICENSE.txt
+output/README.md

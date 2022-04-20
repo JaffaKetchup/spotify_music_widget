@@ -17,5 +17,5 @@ def cleanPreviousTemps():  # Delete any previous temporary unpacks of the execut
     cwd = resourcePath('')
     for item in glob.glob(os.path.join(os.path.abspath(
             os.path.join(cwd, '..')), '_MEI*')):
-        if not cwd in item:
+        if item != cwd[:-1]:
             rmtree(item)

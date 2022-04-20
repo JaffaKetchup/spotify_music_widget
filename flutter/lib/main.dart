@@ -184,7 +184,7 @@ class _AppInterfaceState extends State<AppInterface> with WindowListener {
               milliseconds:
                   (trackInfo?['timing']['elapsed'] ?? 0) + currentSecs * 1000);
 
-          visible = elapsedTime.inMilliseconds <= 10000 ||
+          visible = elapsedTime.inMilliseconds <= 15000 ||
               ((trackInfo?['timing']['duration'] ?? 0) -
                           elapsedTime.inMilliseconds <=
                       10000 &&
@@ -276,6 +276,7 @@ class _AppInterfaceState extends State<AppInterface> with WindowListener {
                         TrackImage(
                           trackInfo: trackInfo,
                           colorMode: colorMode,
+                          elapsedTime: elapsedTime,
                         ),
                         const SizedBox(width: 10),
                       ],
